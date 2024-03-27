@@ -1,0 +1,46 @@
+.container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+  border-radius: 10px;
+  background-color: var(--bgSoft);
+}
+.title {
+  color: var(--textSoft);
+  font-weight: bold;
+  text-transform: uppercase;
+}
+.menu {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+.search {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background-color: #2e374a;
+  padding: 10px;
+  border-radius: 10px;
+}
+.icons {
+  display: flex;
+  gap: 20px;
+}
+.icon {
+  cursor: pointer;
+}
+.balance {
+  color: rgb(5, 85, 5);
+}
+.button {
+  padding: 5px 10px;
+  border-radius: 5px;
+  color: var(--text);
+  border: none;
+  cursor: pointer;
+  background-color: teal;
+  margin-left: 10px;
+  text-transform: uppercase;
+}

@@ -1,0 +1,19 @@
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 30px;
+  margin-bottom: 5px;
+  color: var(--textSoft);
+  width: 80%;
+  border-top: 1px solid var(--bgSoft);
+  padding: 5px;
+}
+
+.logo {
+  font-weight: bold;
+}
+
+.text {
+  font-size: 12px;
+}

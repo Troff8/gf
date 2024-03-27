@@ -1,0 +1,49 @@
+.container {
+  width: 100%;
+  background-color: var(--bgSoft);
+  padding: 20px;
+}
+.triangle {
+  width: 0px;
+  height: 0px;
+  border-style: solid;
+  border-width: 0 35px 80px 35px;
+  border-color: transparent transparent var(--bg) transparent;
+  transform: rotate(0deg);
+  position: relative;
+  z-index: 1;
+  left: 50%;
+  transform: translate(-50%, 25px);
+}
+.scopeHidden {
+  list-style: none;
+  overflow: hidden;
+  max-width: 750px;
+  border-radius: 10px;
+  box-shadow: 0px 0px 25px rgba(0, 0, 0, 0.5);
+}
+.scopeHidden > ul {
+  list-style: none;
+  position: relative;
+  left: 0;
+  display: inline-flex;
+  transition: 3s ease;
+}
+
+.scopeHidden > ul > li {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 80px;
+  height: 100px;
+  border: 1px solid black;
+}
+
+.scopeHidden > ul > li.middle {
+  background: #282828;
+}
+.wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
