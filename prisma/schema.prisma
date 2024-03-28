@@ -13,8 +13,47 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+model Account {
+  id           String  @id @default(cuid())
+  userId       String  @unique
+  access_token String?
+  user         User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
 model User {
-  id    Int     @id @default(autoincrement())
-  email String  @unique
-  name  String?
+  id           String         @id @default(cuid())
+  active       Boolean        @default(true)
+  nickname     String?
+  image        String?
+  winning      Int?
+  games        Int?
+  tradeLink    String?
+  transactions Transactions[]
+  account      Account[]
+
+  createdAt DateTime @default(dbgenerated("timezone('utc'::text, now())")) @db.Timestamp()
+}
+
+model Transactions {
+  id        String   @id @default(cuid())
+  user      User     @relation(fields: [userId], references: [id])
+  userId    String
+  date      DateTime
+  type      String
+  sum       String
+  createdAt DateTime @default(dbgenerated("timezone('utc'::text, now())")) @db.Timestamp()
+}
+
+model Game {
+  id        String   @id @default(cuid())
+  createdAt DateTime @default(dbgenerated("timezone('utc'::text, now())")) @db.Timestamp()
+}
+
+model Report {
+  id          String   @id @default(cuid())
+  title       String
+  description String
+  href        String
+  userAgent   String
+  createdAt   DateTime @default(dbgenerated("timezone('utc'::text, now())")) @db.Timestamp()
 }
