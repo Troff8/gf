@@ -38,7 +38,6 @@ model Transactions {
   id        String   @id @default(cuid())
   user      User     @relation(fields: [userId], references: [id])
   userId    String
-  date      DateTime
   type      String
   sum       String
   createdAt DateTime @default(dbgenerated("timezone('utc'::text, now())")) @db.Timestamp()

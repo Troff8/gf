@@ -1,20 +1,23 @@
 import Pagination from "@/app/ui/game/pagination/pagination";
 import styles from "@/app/ui/game/PlayersPage/playersPage.module.css";
 import Search from "@/app/ui/game/search/search";
+import { getFromDataPlayers } from "@/utils/data";
 import Image from "next/image";
 import Link from "next/link";
 import { GiFrogPrince } from "react-icons/gi";
 
-async function getData() {
-  const responce = await fetch("http://localhost:3000/api/users/");
-  if (!responce.ok) {
-    throw new Error("Failed to fetch data");
-  }
-  return responce.json();
+interface SearchParams {
+  page?: number;
 }
 
-const PlayersPage = async () => {
-  const data = await getData();
+const PlayersPage = async ({
+  searchParams,
+}: {
+  searchParams: SearchParams;
+}) => {
+  const page = searchParams?.page || 1;
+  const data = await getFromDataPlayers(page);
+  if (!data) return;
   return (
     <div className={styles.container}>
       <div className={styles.top}>
@@ -47,7 +50,7 @@ const PlayersPage = async () => {
                     {user.nickname}
                   </div>
                 </td>
-                <td>{user.createdAt}</td>
+                <td>{new Date(user.createdAt).toLocaleDateString()}</td>
                 <td>{user.games}</td>
                 <td>
                   {user.winning} <GiFrogPrince size={15} color="yellow" />
@@ -64,7 +67,7 @@ const PlayersPage = async () => {
           })}
         </tbody>
       </table>
-      <Pagination />
+      <Pagination count={data.totalCount} />
     </div>
   );
 };

@@ -1,10 +1,10 @@
 import { NextResponse } from "next/server";
 
-import { findAllUsers } from "@/utils/db/user";
+import { findUsers } from "@/utils/db/user";
 
 export async function GET() {
   try {
-    const answer = await findAllUsers();
+    const answer = await findUsers();
     return NextResponse.json(answer);
   } catch (error) {}
 }

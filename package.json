@@ -6,7 +6,7 @@
     "dev": "next dev",
     "start": "next start",
     "lint": "next lint",
-    "dev:db:init": "npx prisma migrate dev && npx prisma db seed",
+    "dev:db:init": "npx prisma migrate dev",
     "dev:db:run": "docker-compose -f docker-compose.dev.yml up -d",
     "db:reset": "npx prisma db push --force-reset",
     "db:seed": "npx prisma db seed"
