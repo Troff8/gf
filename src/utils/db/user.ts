@@ -39,3 +39,15 @@ export const findUsers = async (page: number) => {
   }
   return { users: users, totalCount: totalCount };
 };
+export const findInfoUser = async (id: string) => {
+  try {
+    const info = await prisma.user.findUnique({
+      where: {
+        id: id,
+      },
+    });
+    return info;
+  } catch (error) {
+    throw new Error("Error search infoUser");
+  }
+};

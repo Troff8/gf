@@ -1,36 +1,65 @@
 import Image from "next/image";
 import styles from "@/app/ui/game/playersPage/singleUserPage/singleUserPage.module.css";
+import { getInfoUser } from "@/utils/data";
 
-const SinglePlayerPage = () => {
+export default async function SinglePlayerPage({
+  params,
+}: {
+  params: {
+    id: string;
+    slug: string;
+  };
+}) {
+  const data = await getInfoUser(params.id);
+  if (!data) return;
+  console.log(data);
   return (
     <div className={styles.container}>
       <div className={styles.infoContainer}>
         <div className={styles.imgContainer}>
-          <Image src="/avatar.jpg" alt="" fill />
+          {data.image ? (
+            <Image
+              src={data.image}
+              alt=""
+              width={40}
+              height={40}
+              className={styles.userImage}
+            />
+          ) : null}
         </div>
-        Jesse Pinkman
+        {data.nickname}
       </div>
       <div className={styles.formContainer}>
         <label>Username</label>
         <input
           type="text"
           name="username"
-          placeholder="Jesse Pinkman"
+          placeholder={`${data.nickname}`}
           disabled
         />
         <label>Created at</label>
         <input
           type="text"
           name="Created at"
-          placeholder="01.01.2017"
+          placeholder={`${new Date(data.createdAt).toLocaleDateString()}`}
           disabled
         />
         <label>Total games</label>
-        <input type="text" name="Total games" placeholder="43" disabled />
+        <input
+          type="text"
+          name="Total games"
+          placeholder={`${data.games}`}
+          disabled
+        />
         <label>Winning</label>
-        <input type="text" name="Winning" placeholder="43590" disabled />
+        <input
+          type="text"
+          name="Winning"
+          placeholder={`${data.winning}`}
+          disabled
+        />
       </div>
     </div>
   );
-};
-export default SinglePlayerPage;
+}
+// export default SinglePlayerPage;
