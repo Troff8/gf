@@ -2,8 +2,19 @@ import Pagination from "@/app/ui/game/pagination/pagination";
 import styles from "@/app/ui/game/TransactionsPage/transactionsPage.module.css";
 import Search from "@/app/ui/game/search/search";
 import { GiFrogPrince } from "react-icons/gi";
+import type { InferGetServerSidePropsType, GetServerSideProps } from "next";
 
-const TransactionsPage = () => {
+async function getData() {
+  const responce = await fetch("http://localhost:3000/api/transactions/user/1");
+  if (!responce.ok) {
+    // This will activate the closest `error.js` Error Boundary
+    throw new Error("Failed to fetch data");
+  }
+
+  return responce.json();
+}
+const TransactionsPage = async () => {
+  const transactions = await getData();
   return (
     <div className={styles.container}>
       <div className={styles.top}>
@@ -21,33 +32,19 @@ const TransactionsPage = () => {
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td>23095209435ujwid</td>
-            <td>01.01.2024</td>
-            <td>16:34:32</td>
-            <td>purchase</td>
-            <td>
-              124124 <GiFrogPrince size={15} color="yellow" />
-            </td>
-          </tr>
-          <tr>
-            <td>okdko45knckoso2</td>
-            <td>01.01.2024</td>
-            <td>18:19:32</td>
-            <td>bid</td>
-            <td>
-              800 <GiFrogPrince size={15} color="yellow" />
-            </td>
-          </tr>
-          <tr>
-            <td>ikn234co23nd13</td>
-            <td>02.01.2024</td>
-            <td>23:19:32</td>
-            <td>conclusion</td>
-            <td>
-              499 <GiFrogPrince size={15} color="yellow" />
-            </td>
-          </tr>
+          {transactions.map((transaction: any) => {
+            return (
+              <tr key={transaction.id}>
+                <td>{transaction.id}</td>
+                <td>{transaction.date}</td>
+                <td>{transaction.createdAt}</td>
+                <td>{transaction.type}</td>
+                <td>
+                  {transaction.sum} <GiFrogPrince size={15} color="yellow" />
+                </td>
+              </tr>
+            );
+          })}
         </tbody>
       </table>
       <Pagination />

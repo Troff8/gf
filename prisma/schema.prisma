@@ -42,11 +42,14 @@ model Transactions {
   type      String
   sum       String
   createdAt DateTime @default(dbgenerated("timezone('utc'::text, now())")) @db.Timestamp()
+  Game      Game[]
 }
 
 model Game {
-  id        String   @id @default(cuid())
-  createdAt DateTime @default(dbgenerated("timezone('utc'::text, now())")) @db.Timestamp()
+  id             String       @id @default(cuid())
+  transactions   Transactions @relation(fields: [transactionsId], references: [id])
+  createdAt      DateTime     @default(dbgenerated("timezone('utc'::text, now())")) @db.Timestamp()
+  transactionsId String
 }
 
 model Report {

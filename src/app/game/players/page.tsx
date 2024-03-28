@@ -5,7 +5,16 @@ import Image from "next/image";
 import Link from "next/link";
 import { GiFrogPrince } from "react-icons/gi";
 
-const PlayersPage = () => {
+async function getData() {
+  const responce = await fetch("http://localhost:3000/api/users/");
+  if (!responce.ok) {
+    throw new Error("Failed to fetch data");
+  }
+  return responce.json();
+}
+
+const PlayersPage = async () => {
+  const data = await getData();
   return (
     <div className={styles.container}>
       <div className={styles.top}>
@@ -21,32 +30,38 @@ const PlayersPage = () => {
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td>
-              <div className={styles.user}>
-                <Image
-                  src="/avatar.jpg"
-                  alt=""
-                  width={40}
-                  height={40}
-                  className={styles.userImage}
-                />
-                Jesse Pinkman
-              </div>
-            </td>
-            <td>01.01.2024</td>
-            <td>134</td>
-            <td>
-              124124 <GiFrogPrince size={15} color="yellow" />
-            </td>
-            <td>
-              <Link href={`/game/players/${1}`}>
-                <button className={`${styles.button} ${styles.view}`}>
-                  view
-                </button>
-              </Link>
-            </td>
-          </tr>
+          {data.users.map((user: any) => {
+            return (
+              <tr key={user.id}>
+                <td>
+                  <div className={styles.user}>
+                    {user.image ? (
+                      <Image
+                        src={user.image}
+                        alt=""
+                        width={40}
+                        height={40}
+                        className={styles.userImage}
+                      />
+                    ) : null}
+                    {user.nickname}
+                  </div>
+                </td>
+                <td>{user.createdAt}</td>
+                <td>{user.games}</td>
+                <td>
+                  {user.winning} <GiFrogPrince size={15} color="yellow" />
+                </td>
+                <td>
+                  <Link href={`/game/players/${user.id}`}>
+                    <button className={`${styles.button} ${styles.view}`}>
+                      view
+                    </button>
+                  </Link>
+                </td>
+              </tr>
+            );
+          })}
         </tbody>
       </table>
       <Pagination />
