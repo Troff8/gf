@@ -10,6 +10,9 @@
   color: var(--textSoft);
   font-weight: bold;
   text-transform: uppercase;
+  display: flex;
+  align-items: center;
+  gap: 5px;
 }
 .menu {
   display: flex;

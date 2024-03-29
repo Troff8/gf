@@ -11,11 +11,11 @@ const Game = () => {
       <div className={styles.main}>
         <div className={styles.cards}>
           <Card
-            cardInfo={{ title: "Total players", value: "10.423", proc: 13 }}
+            cardInfo={{ title: "Total players", value: "10423", proc: 13 }}
           />
           <Card cardInfo={{ title: "Total games", value: "777", proc: 5 }} />
           <Card
-            cardInfo={{ title: "Total winnings", value: "103323", proc: 13 }}
+            cardInfo={{ title: "Total winnings", value: "1003323", proc: 13 }}
           />
         </div>
         <Roulette />

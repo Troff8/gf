@@ -3,12 +3,14 @@ import styles from "@/app/ui/game/navbar/navbar.module.css";
 import { MdVolumeMute } from "react-icons/md";
 import { GiFrogPrince } from "react-icons/gi";
 import Search from "../search/search";
+import { modifyNumberString } from "@/utils/game";
 
 const NavBar = () => {
   return (
     <div className={styles.container}>
       <div className={styles.title}>
-        Balance <span className={styles.balance}>100</span>{" "}
+        Balance{" "}
+        <span className={styles.balance}>{modifyNumberString("1230123")}</span>{" "}
         <GiFrogPrince size={15} color="yellow" />
         <button className={styles.button}>replenish</button>
       </div>

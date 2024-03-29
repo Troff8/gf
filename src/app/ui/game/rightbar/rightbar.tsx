@@ -1,6 +1,8 @@
 import { GiFrogPrince } from "react-icons/gi";
+import { modifyNumberString } from "@/utils/game";
 import styles from "./rightbar.module.css";
 import Image from "next/image";
+
 const RightBar = () => {
   return (
     <div className={styles.container}>
@@ -20,7 +22,7 @@ const RightBar = () => {
           <div className={styles.info}>
             <div className={styles.winBalance}>
               <GiFrogPrince size={15} color="yellow" />
-              <span>104</span>
+              <span>{modifyNumberString("104")}</span>
             </div>
             <span>16%</span>
           </div>
@@ -44,7 +46,7 @@ const RightBar = () => {
           <div className={styles.info}>
             <div className={styles.winBalance}>
               <GiFrogPrince size={15} color="yellow" />
-              <span>104</span>
+              <span>{modifyNumberString("10442")}</span>
             </div>
             <span>16%</span>
           </div>
@@ -66,7 +68,7 @@ const RightBar = () => {
           <div className={styles.info}>
             <div className={styles.winBalance}>
               <GiFrogPrince size={15} color="yellow" />
-              <div>104</div>
+              <div>{modifyNumberString("1042323")}</div>
             </div>
             <span>16%</span>
           </div>

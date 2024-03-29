@@ -118,7 +118,9 @@
   align-items: center;
   background-color: var(--bg);
   border-radius: 10px;
-  padding: 15px;
+  padding: 10px;
+  background: linear-gradient(rgb(255 133 0), rgb(255 65 65));
+  font-weight: 600;
 }
 .nicknameWinner {
   color: rgb(255, 217, 65);

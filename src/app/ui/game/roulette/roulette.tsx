@@ -4,6 +4,7 @@ import Image from "next/image";
 import styles from "./roulette.module.css";
 import clsx from "clsx";
 import { GiFrogPrince } from "react-icons/gi";
+import { modifyNumberString } from "@/utils/game";
 
 const cells = 31;
 
@@ -105,7 +106,7 @@ const Roulette = () => {
           </div>
           <div className={styles.bet}>
             <GiFrogPrince size={20} color="yellow" />
-            <div>104343</div>
+            <div>{modifyNumberString("1231123")}</div>
           </div>
         </div>
         <div className={styles.actions}>
