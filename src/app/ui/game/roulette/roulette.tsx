@@ -110,7 +110,7 @@ const Roulette = () => {
           </div>
         </div>
         <div className={styles.actions}>
-          <div>
+          <div className={styles.text}>
             Min bet 2 <GiFrogPrince size={15} color="yellow" />
             <div> The higher the bet, the greater the chance to win.</div>
           </div>

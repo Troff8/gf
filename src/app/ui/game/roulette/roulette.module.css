@@ -134,3 +134,8 @@
   padding: 20px;
   border-radius: 10px;
 }
+
+.text {
+  font-size: 14px;
+  color: var(--textSoft);
+}
