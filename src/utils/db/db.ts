@@ -1,4 +1,4 @@
-import { prisma } from "../prisma";
+import prisma from "../prisma";
 
 const ITEM_PER_PAGE = 8;
 
@@ -49,5 +49,26 @@ export const findInfoUser = async (id: string) => {
     return info;
   } catch (error) {
     throw new Error("Error search infoUser");
+  }
+};
+export const createReport = async (
+  title: string,
+  description: string,
+  userAgent: string,
+  pathUrl: string
+) => {
+  try {
+    await prisma.report.create({
+      data: {
+        title: title,
+        description: description,
+        userAgent: userAgent,
+        href: pathUrl,
+      },
+    });
+    return true;
+  } catch (error) {
+    console.log(error);
+    throw new Error("Error create reports");
   }
 };

@@ -1,0 +1,29 @@
+.form {
+  width: 800px;
+  padding: 20px;
+  background-color: var(--bg);
+}
+.formContent {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+.buttons {
+  display: flex;
+  justify-content: flex-end;
+}
+.button {
+  padding: 5px 10px;
+  border-radius: 5px;
+  color: var(--text);
+  border: none;
+  cursor: pointer;
+  margin-left: 10px;
+  text-transform: uppercase;
+}
+.send {
+  background-color: teal;
+}
+.cancel {
+  background-color: rgb(183, 29, 29);
+}

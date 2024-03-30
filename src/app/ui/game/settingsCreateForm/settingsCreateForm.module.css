@@ -1,0 +1,22 @@
+.form {
+  padding: 10px;
+  background-color: var(--bg);
+}
+.formContent {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.button {
+  padding: 5px 10px;
+  border-radius: 5px;
+  color: var(--text);
+  border: none;
+  cursor: pointer;
+  margin-left: 10px;
+  text-transform: uppercase;
+}
+.send {
+  background-color: teal;
+}

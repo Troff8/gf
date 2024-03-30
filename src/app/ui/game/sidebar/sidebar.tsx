@@ -19,21 +19,25 @@ const menuItems = [
       {
         title: "Game",
         path: "/game",
+        type: "link",
         icon: <GiFrogPrince />,
       },
       {
         title: "Players",
         path: "/game/players",
+        type: "link",
         icon: <MdSupervisedUserCircle />,
       },
       {
         title: "Shop",
         path: "/game/shop",
+        type: "link",
         icon: <MdShoppingBag />,
       },
       {
         title: "Transactions",
         path: "/game/transactions",
+        type: "link",
         icon: <MdAttachMoney />,
       },
     ],
@@ -43,7 +47,7 @@ const menuItems = [
     list: [
       {
         title: "Reports",
-        path: "/game/reports",
+        type: "modal",
         icon: <MdAnalytics />,
       },
     ],
@@ -53,12 +57,13 @@ const menuItems = [
     list: [
       {
         title: "Settings",
-        path: "/game/settings",
+        type: "modal",
         icon: <MdOutlineSettings />,
       },
       {
         title: "Help",
         path: "/game/help",
+        type: "link",
         icon: <MdHelpCenter />,
       },
     ],

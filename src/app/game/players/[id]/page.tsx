@@ -12,7 +12,6 @@ export default async function SinglePlayerPage({
 }) {
   const data = await getInfoUser(params.id);
   if (!data) return;
-  console.log(data);
   return (
     <div className={styles.container}>
       <div className={styles.infoContainer}>
