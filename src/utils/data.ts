@@ -1,9 +1,11 @@
 import {
   createReport,
   findGF,
+  findLastWinner,
   findInfoUser,
   findTransactions,
   findUsers,
+  findBiggestBet,
 } from "./db/db";
 
 export const getFromDataTransactions = async (userId: string, page: number) => {
@@ -36,7 +38,11 @@ export const getFromDataGF = async () => {
   const data = await findGF();
   return data;
 };
-export const getFromDataGFInfoGames = async () => {
-  const data = null;
+export const getFromDataGFLastWinner = async () => {
+  const data = await findLastWinner();
+  return data;
+};
+export const getFromDataGFBiggestBet = async () => {
+  const data = await findBiggestBet();
   return data;
 };

@@ -17,38 +17,47 @@ model Account {
   id           String  @id @default(cuid())
   userId       String  @unique
   access_token String?
-  user         User    @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
 
 model User {
-  id           String         @id @default(cuid())
-  active       Boolean        @default(true)
+  id           String        @id @default(cuid())
+  active       Boolean       @default(true)
   nickname     String?
   image        String?
-  winning      Int?
-  games        Int?
   tradeLink    String?
-  transactions Transactions[]
-  account      Account[]
+  transactions Transaction[]
+  gameUser     GameUser[]
+  Game         Game[]
 
   createdAt DateTime @default(dbgenerated("timezone('utc'::text, now())")) @db.Timestamp()
 }
 
-model Transactions {
+model Transaction {
   id        String   @id @default(cuid())
-  user      User     @relation(fields: [userId], references: [id])
-  userId    String
+  user      User?    @relation(fields: [userId], references: [id])
+  userId    String?
   type      String
-  sum       String
+  sum       Int
+  game      Game?    @relation(fields: [gameId], references: [id])
+  gameId    String?
   createdAt DateTime @default(dbgenerated("timezone('utc'::text, now())")) @db.Timestamp()
-  Game      Game[]
 }
 
 model Game {
-  id             String       @id @default(cuid())
-  transactions   Transactions @relation(fields: [transactionsId], references: [id])
-  createdAt      DateTime     @default(dbgenerated("timezone('utc'::text, now())")) @db.Timestamp()
-  transactionsId String
+  id           String        @id @default(cuid())
+  transactions Transaction[]
+  winner       User?         @relation(fields: [winnerId], references: [id])
+  winnerId     String?
+  gameUser     GameUser[]
+  createdAt    DateTime      @default(dbgenerated("timezone('utc'::text, now())")) @db.Timestamp()
+}
+
+model GameUser {
+  id     String @id @default(cuid())
+  game   Game   @relation(fields: [gameId], references: [id])
+  gameId String
+  user   User   @relation(fields: [userId], references: [id])
+  userId String
 }
 
 model Report {

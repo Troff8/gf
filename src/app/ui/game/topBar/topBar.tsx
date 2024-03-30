@@ -12,7 +12,7 @@ const TopBar = async () => {
       <Card
         cardInfo={{
           title: "Total winnings",
-          value: data.totalWinnings._sum.winning,
+          value: data.totalWinnings,
           proc: 13,
         }}
       />

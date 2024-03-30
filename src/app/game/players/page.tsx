@@ -17,6 +17,7 @@ const PlayersPage = async ({
 }) => {
   const page = searchParams?.page || 1;
   const data = await getFromDataPlayers(page);
+  console.log(data);
   if (!data) return;
   return (
     <div className={styles.container}>
@@ -51,7 +52,7 @@ const PlayersPage = async ({
                   </div>
                 </td>
                 <td>{new Date(user.createdAt).toLocaleDateString()}</td>
-                <td>{user.games}</td>
+                <td>{user.totalGames}</td>
                 <td>
                   {user.winning} <GiFrogPrince size={15} color="yellow" />
                 </td>

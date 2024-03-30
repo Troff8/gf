@@ -13,7 +13,7 @@ const TransactionsPage = async ({
   searchParams: SearchParams;
 }) => {
   const page = searchParams?.page || 1;
-  const data = await getFromDataTransactions("clueaqqp90000jd0am7xpuomn", page); // FIXME
+  const data = await getFromDataTransactions("clueen1zb002g68atnlrilo6n", page); // FIXME
   if (!data) return;
   return (
     <div className={styles.container}>

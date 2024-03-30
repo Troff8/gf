@@ -41,7 +41,7 @@ export default async function SinglePlayerPage({
         <input
           type="text"
           name="Total games"
-          placeholder={`${data.games}`}
+          placeholder={`${data.totalGames}`}
           disabled
         />
         <label>Winning</label>

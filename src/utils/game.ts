@@ -1,5 +1,5 @@
 export const modifyNumberString = (input: number | null) => {
-  if (!input) return;
+  if (!input) return 0;
   if (input < 1000) return input.toString();
 
   const chars = input.toString().split("");

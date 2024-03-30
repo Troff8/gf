@@ -22,7 +22,6 @@ const ReportsCreateForm: React.FC = () => {
     },
   });
   const onSubmit: SubmitHandler<FieldValues> = async (data) => {
-    console.log(data);
     const res = await fetch("http://localhost:3000/api/report", {
       method: "POST",
       headers: {
