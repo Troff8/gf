@@ -3,7 +3,7 @@ import { MdSupervisedUserCircle } from "react-icons/md";
 import { modifyNumberString } from "@/utils/game";
 interface CardProps {
   title: string;
-  value: string;
+  value: number | null;
   proc: number;
 }
 const Card = ({ cardInfo }: { cardInfo: CardProps }) => {

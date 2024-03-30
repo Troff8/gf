@@ -1,26 +1,14 @@
-import Card from "../ui/game/card/card";
 import styles from "../ui/game/game.module.css";
 import RightBar from "../ui/game/rightbar/rightbar";
 import Roulette from "../ui/game/roulette/roulette";
+import TopBar from "../ui/game/topBar/topBar";
 import Transactions from "../ui/game/transactions/transactions";
-import dynamic from "next/dynamic";
-const ReportsCreateForm = dynamic(
-  () => import("../ui/game/reportsCreateForm/reportsCreateForm")
-);
 
 const Game = () => {
   return (
     <div className={styles.wrapper}>
       <div className={styles.main}>
-        <div className={styles.cards}>
-          <Card
-            cardInfo={{ title: "Total players", value: "10423", proc: 13 }}
-          />
-          <Card cardInfo={{ title: "Total games", value: "777", proc: 5 }} />
-          <Card
-            cardInfo={{ title: "Total winnings", value: "1003323", proc: 13 }}
-          />
-        </div>
+        <TopBar />
         <Roulette />
         <Transactions />
       </div>

@@ -1,6 +1,6 @@
 import Image from "next/image";
 import styles from "@/app/ui/game/playersPage/singleUserPage/singleUserPage.module.css";
-import { getInfoUser } from "@/utils/data";
+import { getFromInfoUser } from "@/utils/data";
 
 export default async function SinglePlayerPage({
   params,
@@ -10,7 +10,7 @@ export default async function SinglePlayerPage({
     slug: string;
   };
 }) {
-  const data = await getInfoUser(params.id);
+  const data = await getFromInfoUser(params.id);
   if (!data) return;
   return (
     <div className={styles.container}>

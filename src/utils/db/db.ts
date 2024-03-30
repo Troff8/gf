@@ -72,3 +72,38 @@ export const createReport = async (
     throw new Error("Error create reports");
   }
 };
+export const findGF = async () => {
+  try {
+    const players = await prisma.user.count({});
+    const games = await prisma.game.count({});
+    const totalWinnings = await prisma.user.aggregate({
+      _sum: {
+        winning: true,
+      },
+    });
+    return { players, games, totalWinnings };
+  } catch (error) {
+    throw new Error("Error search GF data");
+  }
+};
+
+export const findGFInfoGames = async () => {
+  try {
+    // const players = await prisma.game.findUnique({
+    //   select: {
+    //     orderBy: { id: "desc" },
+    //     take: 1,
+    //   },
+    // });
+    // const games = await prisma.game.count({});
+    // const totalWinnings = await prisma.user.aggregate({
+    //   _sum: {
+    //     winning: true,
+    //   },
+    // });
+    // return { players, games, totalWinnings };
+    return 200;
+  } catch (error) {
+    throw new Error("Error search GF data");
+  }
+};

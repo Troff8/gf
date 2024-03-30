@@ -1,5 +1,6 @@
 import {
   createReport,
+  findGF,
   findInfoUser,
   findTransactions,
   findUsers,
@@ -17,7 +18,7 @@ export const getFromDataPlayers = async (page: number) => {
   return users;
 };
 
-export const getInfoUser = async (id: string) => {
+export const getFromInfoUser = async (id: string) => {
   if (!id) return null; //?
   const infoUser = await findInfoUser(id);
   return infoUser;
@@ -30,4 +31,12 @@ export const setReport = (
 ) => {
   if (!title || !description) return null;
   createReport(title, description, userAgent, pathUrl);
+};
+export const getFromDataGF = async () => {
+  const data = await findGF();
+  return data;
+};
+export const getFromDataGFInfoGames = async () => {
+  const data = null;
+  return data;
 };
