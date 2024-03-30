@@ -17,13 +17,7 @@ export default async function SinglePlayerPage({
       <div className={styles.infoContainer}>
         <div className={styles.imgContainer}>
           {data.image ? (
-            <Image
-              src={data.image}
-              alt=""
-              width={40}
-              height={40}
-              className={styles.userImage}
-            />
+            <Image src={data.image} alt="" className={styles.userImage} fill />
           ) : null}
         </div>
         {data.nickname}
