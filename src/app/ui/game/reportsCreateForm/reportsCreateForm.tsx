@@ -7,14 +7,9 @@ import {
 } from "react-hook-form";
 import { Input } from "../input/input";
 import clsx from "clsx";
+import { ModalEvent, dispatchModalEvent } from "@/utils/dispatchModal";
 
-interface ReportsCreateFormProps {
-  onClose: () => void;
-}
-
-const ReportsCreateForm = ({
-  onClose,
-}: ReportsCreateFormProps): JSX.Element => {
+const ReportsCreateForm: React.FC = () => {
   const {
     control,
     register,
@@ -41,7 +36,7 @@ const ReportsCreateForm = ({
       }),
     });
     if (res) {
-      onClose();
+      dispatchModalEvent(ModalEvent.ReportCreateModal)();
     }
   };
 
@@ -94,7 +89,7 @@ const ReportsCreateForm = ({
                     ${styles.button}
                     ${styles.cancel}
                 `)}
-            onClick={onClose}
+            onClick={dispatchModalEvent(ModalEvent.ReportCreateModal)}
           >
             Cancel
           </button>

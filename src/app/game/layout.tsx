@@ -1,8 +1,13 @@
+"use client";
 import React from "react";
 import Sidebar from "@/app/ui/game/sidebar/sidebar";
 import NavBar from "../ui/game/navbar/navbar";
 import styles from "@/app/ui/game/game.module.css";
 import Footer from "../ui/game/footer/footer";
+import ModalOnEvent from "../ui/game/modalOnEvent/modalOnEvent";
+import ReportsCreateForm from "../ui/game/reportsCreateForm/reportsCreateForm";
+import { ModalEvent } from "@/utils/dispatchModal";
+import SettingsCreateForm from "../ui/game/settingsCreateForm/settingsCreateForm";
 const Layout = ({ children }: { children: React.ReactNode }) => {
   return (
     <>
@@ -18,6 +23,12 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
       <div className={styles.footer}>
         <Footer />
       </div>
+      <ModalOnEvent event={ModalEvent.ReportCreateModal}>
+        <ReportsCreateForm />
+      </ModalOnEvent>
+      <ModalOnEvent event={ModalEvent.SettingsCreateModal}>
+        <SettingsCreateForm />
+      </ModalOnEvent>
     </>
   );
 };

@@ -1,9 +1,12 @@
-import { title } from "process";
 import Card from "../ui/game/card/card";
 import styles from "../ui/game/game.module.css";
 import RightBar from "../ui/game/rightbar/rightbar";
 import Roulette from "../ui/game/roulette/roulette";
 import Transactions from "../ui/game/transactions/transactions";
+import dynamic from "next/dynamic";
+const ReportsCreateForm = dynamic(
+  () => import("../ui/game/reportsCreateForm/reportsCreateForm")
+);
 
 const Game = () => {
   return (

@@ -1,4 +1,3 @@
-import React, { useCallback, useState } from "react";
 import styles from "./settingsCreateForm.module.css";
 import {
   Controller,
@@ -8,13 +7,9 @@ import {
 } from "react-hook-form";
 import { Input } from "../input/input";
 import clsx from "clsx";
+import { ModalEvent, dispatchModalEvent } from "@/utils/dispatchModal";
 
-interface SettingsCreateForm {
-  onClose: () => void;
-}
-
-const SettingsCreateForm = ({ onClose }: SettingsCreateForm): JSX.Element => {
-  const [formBusy, setFormBusy] = useState(false);
+const SettingsCreateForm: React.FC = () => {
   const {
     control,
     register,
@@ -27,7 +22,7 @@ const SettingsCreateForm = ({ onClose }: SettingsCreateForm): JSX.Element => {
     },
   });
   const onSubmit: SubmitHandler<FieldValues> = (data) => {
-    onClose();
+    dispatchModalEvent(ModalEvent.SettingsCreateModal)();
   };
 
   return (

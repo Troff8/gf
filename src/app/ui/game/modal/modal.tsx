@@ -1,5 +1,6 @@
-import { forwardRef } from "react";
+import { forwardRef, useEffect } from "react";
 import styled from "./modal.module.css";
+import { Portal } from "../portal/portal";
 
 type ModalViewType = "default" | "warn" | "danger";
 
@@ -13,20 +14,29 @@ interface ModalProps extends React.HTMLAttributes<HTMLDivElement> {
   children: React.ReactNode;
   visible?: boolean;
   view?: ModalViewType;
+  onClose?: () => void;
+  onShow?: () => void;
 }
 
-export type Ref = HTMLDialogElement;
-export default forwardRef<Ref, ModalProps>(function Modal(
-  { visible, children, ...props },
-  ref
-) {
+export const Modal: React.FC<ModalProps> = ({
+  visible,
+  children,
+  view,
+  onClose,
+  onShow,
+  ...props
+}) => {
+  useEffect(() => {
+    visible && onShow?.();
+  }, [visible, onShow]);
+
   return visible ? (
-    <dialog ref={ref}>
+    <Portal id="Modal">
       <div className={styled.modal}>
         <div className={styled.modalContent}>
           <div className={styled.modalBody}> {children}</div>
         </div>
       </div>
-    </dialog>
+    </Portal>
   ) : null;
-});
+};
