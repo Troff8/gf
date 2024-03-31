@@ -2,11 +2,11 @@ import { GiFrogPrince } from "react-icons/gi";
 import { modifyNumberString } from "@/utils/game";
 import styles from "./rightbar.module.css";
 import Image from "next/image";
-import { getFromDataGFBiggestBet, getFromDataGFLastWinner } from "@/utils/data";
+import { getFromDataGFBiggestWin, getFromDataGFLastWinner } from "@/utils/data";
 
 const RightBar = async () => {
   const dataLastWinner = await getFromDataGFLastWinner();
-  const dataBiggestBet = await getFromDataGFBiggestBet();
+  const dataBiggestWin = await getFromDataGFBiggestWin();
   return (
     <div className={styles.container}>
       {dataLastWinner && (
@@ -61,26 +61,26 @@ const RightBar = async () => {
           </div>
         </div>
       </div>
-      {dataBiggestBet && (
+      {dataBiggestWin && (
         <div className={styles.item}>
           <div className={styles.header}>
             <span className={`${styles.title} ${styles.gold}`}>
-              biggest bet
+              biggest win
             </span>
           </div>
           <Image
-            src={dataBiggestBet.image || ""}
+            src={dataBiggestWin.image || ""}
             alt=""
             width="60"
             height="60"
             className={styles.userImage}
           />
           <div className={`${styles.footer} ${styles.goldFooter}`}>
-            <span className={styles.username}>{dataBiggestBet.nickname}</span>
+            <span className={styles.username}>{dataBiggestWin.nickname}</span>
             <div className={styles.info}>
               <div className={styles.winBalance}>
                 <GiFrogPrince size={15} color="yellow" />
-                <div>{modifyNumberString(dataBiggestBet.maxSum)}</div>
+                <div>{modifyNumberString(dataBiggestWin.maxSum)}</div>
               </div>
               <span>16%</span>
             </div>

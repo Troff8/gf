@@ -159,6 +159,10 @@ export const findLastWinner = async () => {
   try {
     const lastGame = await prisma.game.findFirst({
       orderBy: { createdAt: "desc" },
+      select: {
+        id: true,
+        winnerId: true,
+      },
     });
     if (lastGame) {
       const transactionsSum = await prisma.transaction.aggregate({
@@ -185,7 +189,7 @@ export const findLastWinner = async () => {
     throw new Error("Error search GF data");
   }
 };
-export const findBiggestBet = async () => {
+export const findBiggestWin = async () => {
   const gamesWithTransactionSums = await prisma.game.findMany({
     include: {
       transactions: true,
