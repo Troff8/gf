@@ -17,48 +17,37 @@ interface InputProps
   type?: string;
   textArea?: TextAreaType;
   height?: number;
-  required?: boolean;
-  register?: UseFormRegister<FieldValues>;
   errors?: FieldErrors;
   disabled?: boolean;
+  register: UseFormRegister<any>;
   forwardRef?: React.Ref<HTMLInputElement | HTMLTextAreaElement | null>;
 }
 
 // eslint-disable-next-line react/display-name
 export const Input = React.forwardRef<
-  HTMLInputElement | HTMLTextAreaElement | null, // Обновленный тип
+  HTMLInputElement | HTMLTextAreaElement | null,
   InputProps
 >(
   (
-    {
-      label,
-      id,
-      type,
-      textArea,
-      height,
-      required,
-      register,
-      errors,
-      disabled,
-      ...props
-    },
+    { label, id, type, textArea, height, errors, disabled, register, ...props },
     ref
   ) => {
     return (
       <div className={styles.container}>
-        <label htmlFor={id}>{label}</label>
+        {label && <label htmlFor={id}>{label}</label>}
         {!textArea ? (
           <input
             id={id}
             type={type}
             autoComplete={id}
             disabled={disabled}
-            {...props}
             className={clsx(`
                     ${styles.input}
                     ${disabled && styles.inputDisabled}
                     ${errors && styles.inputError}
                 `)}
+            {...register(id)}
+            {...props}
             ref={ref as React.Ref<HTMLInputElement>}
           />
         ) : (
@@ -66,12 +55,13 @@ export const Input = React.forwardRef<
             id={id}
             autoComplete={id}
             disabled={disabled}
-            {...props}
             className={clsx(`
                   ${styles.input}
                   ${disabled && styles.inputDisabled}
                   ${errors && styles.inputError}
               `)}
+            {...register(id)}
+            {...props}
             ref={ref as React.Ref<HTMLTextAreaElement>}
             style={{ height: height + "px" }}
           ></textarea>

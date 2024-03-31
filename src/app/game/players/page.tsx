@@ -17,7 +17,6 @@ const PlayersPage = async ({
 }) => {
   const page = searchParams?.page || 1;
   const data = await getFromDataPlayers(page);
-  console.log(data);
   if (!data) return;
   return (
     <div className={styles.container}>

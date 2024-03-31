@@ -1,27 +1,28 @@
+import React from "react";
 import styles from "./reportsCreateForm.module.css";
-import {
-  Controller,
-  FieldValues,
-  SubmitHandler,
-  useForm,
-} from "react-hook-form";
+import { Controller, SubmitHandler, useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
 import { Input } from "../input/input";
 import clsx from "clsx";
 import { ModalEvent, dispatchModalEvent } from "@/utils/dispatchModal";
+import { CreateReport, createReportSchema } from "@/app/schema/report";
 
 const ReportsCreateForm: React.FC = () => {
   const {
     control,
-    register,
     handleSubmit,
     formState: { errors },
-  } = useForm<FieldValues>({
+    register,
+    reset,
+  } = useForm<CreateReport>({
     defaultValues: {
       title: "",
       description: "",
     },
+    resolver: zodResolver(createReportSchema),
   });
-  const onSubmit: SubmitHandler<FieldValues> = async (data) => {
+
+  const onSubmit: SubmitHandler<CreateReport> = async (data) => {
     const res = await fetch("http://localhost:3000/api/report", {
       method: "POST",
       headers: {
@@ -36,6 +37,7 @@ const ReportsCreateForm: React.FC = () => {
     });
     if (res) {
       dispatchModalEvent(ModalEvent.ReportCreateModal)();
+      reset();
     }
   };
 
@@ -45,16 +47,11 @@ const ReportsCreateForm: React.FC = () => {
         <Controller
           name="title"
           control={control}
-          rules={{
-            required: true,
-            minLength: 3,
-            maxLength: 30,
-          }}
           render={({ field }) => (
             <Input
-              label="Title"
               register={register}
-              id={"title"}
+              label="Title"
+              id="title"
               errors={errors}
               type="text"
               {...field}
@@ -64,16 +61,11 @@ const ReportsCreateForm: React.FC = () => {
         <Controller
           name="description"
           control={control}
-          rules={{
-            required: true,
-            minLength: 3,
-            maxLength: 200,
-          }}
           render={({ field }) => (
             <Input
               register={register}
-              label="Decsription"
-              id={"decsription"}
+              label="Description"
+              id="description"
               errors={errors}
               type="text"
               textArea={{ rows: 5, cols: 10 }}
@@ -84,21 +76,13 @@ const ReportsCreateForm: React.FC = () => {
         />
         <div className={styles.buttons}>
           <button
-            className={clsx(`
-                    ${styles.button}
-                    ${styles.cancel}
-                `)}
+            type="button"
+            className={clsx(styles.button, styles.cancel)}
             onClick={dispatchModalEvent(ModalEvent.ReportCreateModal)}
           >
             Cancel
           </button>
-          <button
-            type="submit"
-            className={clsx(`
-                    ${styles.button}
-                    ${styles.send}
-                `)}
-          >
+          <button type="submit" className={clsx(styles.button, styles.send)}>
             Send
           </button>
         </div>
