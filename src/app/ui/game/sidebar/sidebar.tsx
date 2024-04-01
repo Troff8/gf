@@ -11,6 +11,8 @@ import {
 import { GiFrogPrince } from "react-icons/gi";
 import MenuLink from "./menuLink/menuLink";
 import Image from "next/image";
+import { getServerSession } from "next-auth";
+import Link from "next/link";
 
 const menuItems = [
   {
@@ -69,22 +71,29 @@ const menuItems = [
     ],
   },
 ];
-const SideBar = () => {
+const SideBar = async () => {
+  const session = await getServerSession();
   return (
     <div className={styles.container}>
-      <div className={styles.user}>
-        <Image
-          src="/avatar.jpg"
-          alt=""
-          width="50"
-          height="50"
-          className={styles.userImage}
-        />
-        <div className={styles.userDetail}>
-          <span className={styles.username}>Troff</span>
-          <span className={styles.userTitle}>Administration</span>
-        </div>
+      <div className={styles.logo}>
+        <GiFrogPrince size={25} color="yellow" />
+        Glassfrog
       </div>
+      {session && (
+        <div className={styles.user}>
+          <Image
+            src={session.user?.image || "./avatar.jpg"}
+            alt=""
+            width="50"
+            height="50"
+            className={styles.userImage}
+          />
+          <div className={styles.userDetail}>
+            <span className={styles.username}>{session.user?.name}</span>
+            <span className={styles.userTitle}>Administration</span>
+          </div>
+        </div>
+      )}
       <ul className={styles.list}>
         {menuItems.map((cat) => (
           <li key={cat.title}>
@@ -95,10 +104,12 @@ const SideBar = () => {
           </li>
         ))}
       </ul>
-      <button className={styles.logout}>
-        <MdLogout />
-        Logout
-      </button>
+      <Link href={`${process.env.NEXT_PUBLIC_URL}/api/auth/signout`}>
+        <button className={styles.logout}>
+          <MdLogout />
+          Logout
+        </button>
+      </Link>
     </div>
   );
 };

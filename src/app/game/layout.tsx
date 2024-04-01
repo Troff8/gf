@@ -1,4 +1,3 @@
-"use client";
 import React from "react";
 import Sidebar from "@/app/ui/game/sidebar/sidebar";
 import NavBar from "../ui/game/navbar/navbar";

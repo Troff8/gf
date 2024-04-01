@@ -47,3 +47,19 @@
   margin-left: 10px;
   text-transform: uppercase;
 }
+
+.buttonSteam {
+  padding: 10px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 5px 0px;
+  border-radius: 10px;
+  max-width: 200px;
+  background: #171a21;
+  cursor: pointer;
+  border: none;
+}
+.buttonSteam span {
+  color: white;
+}

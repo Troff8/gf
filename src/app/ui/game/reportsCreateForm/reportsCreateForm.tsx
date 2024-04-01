@@ -1,3 +1,4 @@
+"use client";
 import React from "react";
 import styles from "./reportsCreateForm.module.css";
 import { Controller, SubmitHandler, useForm } from "react-hook-form";
@@ -23,7 +24,7 @@ const ReportsCreateForm: React.FC = () => {
   });
 
   const onSubmit: SubmitHandler<CreateReport> = async (data) => {
-    const res = await fetch("http://localhost:3000/api/report", {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_URL}/api/report`, {
       method: "POST",
       headers: {
         "content-type": "application/json",

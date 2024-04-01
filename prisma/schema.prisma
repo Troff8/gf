@@ -13,6 +13,15 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+// TODO
+enum TransactionType {
+  BID
+  WINNING
+  REMOVAL
+  REPLENISHMENT
+  replenishment
+}
+
 model Account {
   id           String  @id @default(cuid())
   userId       String  @unique

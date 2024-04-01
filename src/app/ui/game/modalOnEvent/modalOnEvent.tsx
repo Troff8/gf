@@ -1,3 +1,4 @@
+"use client";
 import { useCallback, useEffect, useState, createContext } from "react";
 
 import { Modal } from "@/app/ui/game/modal/modal";
