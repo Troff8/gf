@@ -1,6 +1,6 @@
-import Pagination from "@/app/ui/game/pagination/pagination";
-import styles from "@/app/ui/game/PlayersPage/playersPage.module.css";
-import Search from "@/app/ui/game/search/search";
+import Pagination from "@/app/components/pagination/pagination";
+import styles from "@/app/game/players/playersPage.module.css";
+import Search from "@/app/components/search/search";
 import { getFromDataPlayers } from "@/utils/data";
 import Image from "next/image";
 import Link from "next/link";

@@ -1,4 +1,4 @@
-import styles from "@/app/ui/game/card/card.module.css";
+import styles from "./card.module.css";
 import { MdSupervisedUserCircle } from "react-icons/md";
 import { modifyNumberString } from "@/utils/game";
 interface CardProps {

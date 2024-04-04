@@ -6,7 +6,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { Input } from "../input/input";
 import clsx from "clsx";
 import { ModalEvent, dispatchModalEvent } from "@/utils/dispatchModal";
-import { CreateReport, createReportSchema } from "@/app/schema/report";
+import { CreateReport, createReportSchema } from "@/schema/report";
 
 const ReportsCreateForm: React.FC = () => {
   const {

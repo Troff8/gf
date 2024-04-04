@@ -1,6 +1,6 @@
-import Pagination from "@/app/ui/game/pagination/pagination";
-import styles from "@/app/ui/game/TransactionsPage/transactionsPage.module.css";
-import Search from "@/app/ui/game/search/search";
+import Pagination from "@/app/components/pagination/pagination";
+import styles from "@/app/game/transactions/transactionsPage.module.css";
+import Search from "@/app/components/search/search";
 import { GiFrogPrince } from "react-icons/gi";
 import { getFromDataTransactions } from "@/utils/data";
 interface SearchParams {

@@ -1,8 +1,8 @@
-import styles from "../ui/game/game.module.css";
-import RightBar from "../ui/game/rightbar/rightbar";
-import Roulette from "../ui/game/roulette/roulette";
-import TopBar from "../ui/game/topBar/topBar";
-import Transactions from "../ui/game/transactions/transactions";
+import styles from "@/app/game/game.module.css";
+import RightBar from "@/app/components/rightbar/rightbar";
+import Roulette from "@/app/components/roulette/roulette";
+import TopBar from "@/app/components/topBar/topBar";
+import Transactions from "@/app/components/transactions/transactions";
 
 const Game = () => {
   return (

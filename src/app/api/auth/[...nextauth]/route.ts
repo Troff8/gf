@@ -1,5 +1,5 @@
 import NextAuth from "next-auth/next";
-import { getAuthOptions } from "@/app/configs/auth";
+import { getAuthOptions } from "@/configs/auth";
 
 import type { NextRequest } from "next/server";
 

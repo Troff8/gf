@@ -1,14 +1,16 @@
 import React from "react";
-import Sidebar from "@/app/ui/game/sidebar/sidebar";
-import NavBar from "../ui/game/navbar/navbar";
-import styles from "@/app/ui/game/game.module.css";
-import Footer from "../ui/game/footer/footer";
-import ModalOnEvent from "../ui/game/modalOnEvent/modalOnEvent";
+import Sidebar from "@/app/components/sidebar/sidebar";
+import NavBar from "@/app/components/navbar/navbar";
+import styles from "./game.module.css";
+import Footer from "@/app/components/footer/footer";
+import ModalOnEvent from "@/app/components/modalOnEvent/modalOnEvent";
 import { ModalEvent } from "@/utils/dispatchModal";
-import SettingsCreateForm from "../ui/game/settingsCreateForm/settingsCreateForm";
 import dynamic from "next/dynamic";
 const ReportsCreateForm = dynamic(
-  () => import("../ui/game/reportsCreateForm/reportsCreateForm")
+  () => import("@/app/components/reportsCreateForm/reportsCreateForm")
+);
+const SettingsCreateForm = dynamic(
+  () => import("@/app/components/settingsCreateForm/settingsCreateForm")
 );
 const Layout = ({ children }: { children: React.ReactNode }) => {
   return (

@@ -1,7 +1,7 @@
 "use client";
 import { useCallback, useEffect, useState, createContext } from "react";
 
-import { Modal } from "@/app/ui/game/modal/modal";
+import { Modal } from "@/app/components/modal/modal";
 
 import { ModalEvent, MapModalToComponentProps } from "@/utils/dispatchModal";
 

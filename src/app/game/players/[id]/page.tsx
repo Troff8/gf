@@ -1,5 +1,5 @@
 import Image from "next/image";
-import styles from "@/app/ui/game/playersPage/singleUserPage/singleUserPage.module.css";
+import styles from "@/app/game/players/[id]/singleUserPage.module.css";
 import { getFromInfoUser } from "@/utils/data";
 
 export default async function SinglePlayerPage({

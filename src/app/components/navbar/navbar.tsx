@@ -1,5 +1,5 @@
 "use client";
-import styles from "@/app/ui/game/navbar/navbar.module.css";
+import styles from "@/app/components/navbar/navbar.module.css";
 import Image from "next/image";
 import { MdVolumeMute } from "react-icons/md";
 import { GiFrogPrince } from "react-icons/gi";

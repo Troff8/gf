@@ -1,4 +1,4 @@
-import styles from "@/app/ui/game/sidebar/sidebar.module.css";
+import styles from "./sidebar.module.css";
 import {
   MdAnalytics,
   MdAttachMoney,
