@@ -12,66 +12,9 @@
   max-width: 890px;
   border-radius: 10px;
 }
-.triangle {
-  width: 0px;
-  height: 0px;
-  border-style: solid;
-  border-width: 0 18px 38px 18px;
-  border-color: transparent transparent #ff4532 transparent;
-  transform: rotate(180deg);
-  /* filter: drop-shadow(0 0 20px rgba(230, 174, 174, 0.3)); */
-  position: absolute;
-  z-index: 1;
-  left: 50%;
-}
-.roulette .pointer {
-  position: absolute;
-  z-index: 1;
-  left: 50%;
-  transform: translate3d(-50%, -25px, 0);
-  height: 50px;
-  filter: drop-shadow(0 0 20px rgba(230, 174, 174, 0.3));
-}
-.roulette .scope {
-  overflow: hidden;
-}
-.roulette .scope .list {
-  position: relative;
-  display: inline-flex;
-  /* left: 0; */
-  /* transform: translate3d(0, 0, 0); */
-  list-style: none;
-  transition: 5s cubic-bezier(0.21, 0.53, 0.29, 0.99);
-  gap: 5px;
-}
-.roulette .scope .list__item {
-  flex-shrink: 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 100px;
-  height: 100px;
-  transition: 0.6s ease;
-  background-color: var(--bgSoft);
-}
-.roulette .scope .list__item:nth-child(2n) {
-  background: var(--bg);
-}
-.roulette .scope .list__item.active {
-  opacity: 1;
-}
-.roulette .scope .list__item.active .triangle {
-  transform: scale(1.05);
-}
-.roulette .scope .list__item .triangle {
-  width: 100%;
-  height: 100%;
-  -o-object-fit: contain;
-  object-fit: contain;
-  transition: 0.3s ease;
-}
+
 .start {
-  padding: 8px 25px;
+  padding: 8px 15px;
   border: none;
   border-radius: 5px;
   outline: none;
@@ -86,31 +29,36 @@
 .start:hover {
   opacity: 0.8;
 }
-.isStarted {
-  left: 50%;
-  transform: translate3d(-50%, 0, 0);
-}
-.isStoped {
-  left: 0%;
-  transform: translate3d(0, 0, 0);
-}
-.image {
-  width: 100px;
-  height: 100px;
-  /* border-radius: 50%; */
-  object-fit: cover;
-  transition: 0.3s ease;
+
+.infoGame {
+  display: flex;
+  justify-content: space-between;
 }
 
-.game {
+.gameTitle {
   display: flex;
-  flex-direction: column;
-  gap: 10px;
+  padding: 10px;
+  width: fit-content;
+  border-radius: 10px;
+  background: linear-gradient(
+    170.73deg,
+    rgba(32, 92, 100, 0.154) 7.01%,
+    rgba(40, 121, 116, 0.2) 101.22%
+  );
+  color: #66d08a;
+  gap: 60px;
 }
+.gameHash {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
 .information {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  gap: 10px;
 }
 .bet {
   display: flex;
@@ -133,9 +81,42 @@
   justify-content: space-between;
   padding: 20px;
   border-radius: 10px;
+  gap: 10px;
 }
 
 .text {
-  font-size: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 11px;
+  font-size: 15px;
   color: var(--textSoft);
+}
+
+.bets {
+  display: flex;
+  gap: 10px;
+}
+
+.autoBets {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+.anyBets {
+  max-width: 100px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.game {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+.infoBet {
+  display: flex;
+  gap: 5px;
+  align-items: center;
+  justify-content: flex-end;
 }

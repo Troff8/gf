@@ -19,7 +19,7 @@ interface InputProps
   height?: number;
   errors?: FieldErrors;
   disabled?: boolean;
-  register: UseFormRegister<any>;
+  register?: UseFormRegister<any>;
   forwardRef?: React.Ref<HTMLInputElement | HTMLTextAreaElement | null>;
 }
 
@@ -46,7 +46,7 @@ export const Input = React.forwardRef<
                     ${disabled && styles.inputDisabled}
                     ${errors && styles.inputError}
                 `)}
-            {...register(id)}
+            {...(register ? register(id) : {})}
             {...props}
             ref={ref as React.Ref<HTMLInputElement>}
           />
@@ -60,7 +60,7 @@ export const Input = React.forwardRef<
                   ${disabled && styles.inputDisabled}
                   ${errors && styles.inputError}
               `)}
-            {...register(id)}
+            {...(register ? register(id) : {})}
             {...props}
             ref={ref as React.Ref<HTMLTextAreaElement>}
             style={{ height: height + "px" }}
