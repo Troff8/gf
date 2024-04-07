@@ -1,10 +1,13 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Ubuntu } from "next/font/google";
 import "@/app/styles/globals.css";
 import SessionProvider from "@/app/components/sessionProvider/sessionProvider";
 import { getServerSession } from "next-auth";
 
-const inter = Inter({ subsets: ["latin"] });
+const inter = Ubuntu({
+  subsets: ["latin"],
+  weight: "400",
+});
 
 export const metadata: Metadata = {
   title: "Glassfrog casino",
