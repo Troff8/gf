@@ -6,12 +6,13 @@ type WaitingGameProps = {
 };
 export const WaitingGame = ({ setGame }: WaitingGameProps) => {
   const [seconds, setSeconds] = useState(20);
+  const [timerFinished, setTimerFinished] = useState(false);
   useEffect(() => {
     const interval = setInterval(() => {
       setSeconds((prevSeconds) => {
         if (prevSeconds <= 1) {
           clearInterval(interval);
-          setGame(true);
+          setTimerFinished(true);
           return 0;
         }
         return prevSeconds - 1;
@@ -19,7 +20,13 @@ export const WaitingGame = ({ setGame }: WaitingGameProps) => {
     }, 1000);
 
     return () => clearInterval(interval);
-  }, [seconds, setGame]);
+  }, []);
+
+  useEffect(() => {
+    if (timerFinished) {
+      setGame(true);
+    }
+  }, [timerFinished, setGame]);
 
   return (
     <div className={styles.container}>
