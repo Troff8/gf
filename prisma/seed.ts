@@ -20,7 +20,7 @@ let allGames: Game[];
   console.log("Adding default data...");
   const usersData = Array.from({ length: 100 }, () => [
     faker.internet.userName(),
-    "/jesse.jpg",
+    faker.image.avatarLegacy(),
     faker.internet.url(),
   ]);
 
