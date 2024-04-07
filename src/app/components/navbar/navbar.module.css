@@ -35,7 +35,7 @@
   cursor: pointer;
 }
 .balance {
-  color: rgb(5, 85, 5);
+  color: #38cd6a;
 }
 .button {
   padding: 5px 10px;
@@ -62,4 +62,16 @@
 }
 .buttonSteam span {
   color: white;
+}
+.balanceBlock {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  border-radius: 10px;
+  background: linear-gradient(
+    170.73deg,
+    rgba(19, 165, 184, 0.154) 7.01%,
+    rgba(5, 236, 220, 0.2) 101.22%
+  );
+  padding: 8px;
 }

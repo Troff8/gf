@@ -5,8 +5,8 @@ import { MdVolumeMute } from "react-icons/md";
 import { GiFrogPrince } from "react-icons/gi";
 import Search from "../search/search";
 import { modifyNumberString } from "@/utils/game";
-import { getServerSession } from "next-auth";
 import { signIn, useSession } from "next-auth/react";
+import Link from "next/link";
 
 const NavBar = () => {
   const { data: session } = useSession();
@@ -14,11 +14,19 @@ const NavBar = () => {
     <div className={styles.container}>
       {session ? (
         <div className={styles.title}>
-          Balance
-          <span className={styles.balance}>{modifyNumberString(1020632)}</span>
-          <GiFrogPrince size={15} color="yellow" />
-          <button className={styles.button}>replenish</button>
-          <button className={styles.button}>withdrawal</button>
+          <div className={styles.balanceBlock}>
+            Balance
+            <span className={styles.balance}>
+              {modifyNumberString(1020632)}
+            </span>
+            <GiFrogPrince size={15} color="yellow" />
+          </div>
+          <Link href={`/game/shop`}>
+            <button className={styles.button}>replenish</button>
+          </Link>
+          <Link href={`/game/shop`}>
+            <button className={styles.button}>withdrawal</button>
+          </Link>
         </div>
       ) : (
         <button className={styles.buttonSteam} onClick={() => signIn()}>
