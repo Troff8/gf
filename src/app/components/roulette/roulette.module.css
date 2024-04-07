@@ -120,3 +120,6 @@
   align-items: center;
   justify-content: flex-end;
 }
+.copy {
+  cursor: pointer;
+}
