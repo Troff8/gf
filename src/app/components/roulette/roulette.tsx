@@ -6,8 +6,9 @@ import RouletteGame from "./rouletteGame/rouletteGame";
 import { SiAdguard } from "react-icons/si";
 import { FaCopy } from "react-icons/fa";
 import { Input } from "../input/input";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { WaitingGame } from "./waitingGame/waitingGame";
+import { useCopyToClipboard } from "@/hooks/useCopyToClipboard";
 
 // The playersCount variable is responsible for the number of blocks in roulette
 const playersCount = 150;
@@ -41,7 +42,13 @@ const players = [
 
 const Roulette = () => {
   const [startGame, setStartGame] = useState(false);
+  const [, copyValue] = useCopyToClipboard();
 
+  const onCopyDescription = useCallback(() => {
+    // if (!hash) return;
+
+    copyValue("game12312");
+  }, [copyValue]);
   return (
     <div className={styles.container}>
       <div className={styles.infoGame}>
@@ -51,7 +58,12 @@ const Roulette = () => {
             Game
           </div>
           <div className={styles.gameHash}>
-            #12312412 <FaCopy size={12} />
+            #12312412{" "}
+            <FaCopy
+              size={12}
+              onClick={onCopyDescription}
+              className={styles.copy}
+            />
           </div>
         </div>
         <div className={styles.information}>
