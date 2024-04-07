@@ -18,6 +18,7 @@ const NavBar = () => {
           <span className={styles.balance}>{modifyNumberString(1020632)}</span>
           <GiFrogPrince size={15} color="yellow" />
           <button className={styles.button}>replenish</button>
+          <button className={styles.button}>withdrawal</button>
         </div>
       ) : (
         <button className={styles.buttonSteam} onClick={() => signIn()}>
