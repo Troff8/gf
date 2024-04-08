@@ -1,0 +1,5 @@
+-- CreateEnum
+CREATE TYPE "Rank" AS ENUM ('ROOKIE', 'BRONZE', 'SILVER', 'GOLD', 'DIAMOND', 'EMERALD', 'PRO', 'ADMIN');
+
+-- AlterTable
+ALTER TABLE "User" ADD COLUMN     "rank" "Rank" NOT NULL DEFAULT 'ROOKIE';

@@ -2,7 +2,7 @@ import styles from "@/app/game/game.module.css";
 import RightBar from "@/app/components/rightbar/rightbar";
 import Roulette from "@/app/components/roulette/roulette";
 import TopBar from "@/app/components/topBar/topBar";
-import Transactions from "@/app/components/transactions/transactions";
+import TransactionsGame from "@/app/components/transactionsGame/transactionsGame";
 
 const Game = () => {
   return (
@@ -10,7 +10,7 @@ const Game = () => {
       <div className={styles.main}>
         <TopBar />
         <Roulette />
-        <Transactions />
+        <TransactionsGame />
       </div>
       <div className={styles.side}>
         <RightBar />

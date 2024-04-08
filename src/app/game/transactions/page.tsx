@@ -1,8 +1,8 @@
 import Pagination from "@/app/components/pagination/pagination";
 import styles from "@/app/game/transactions/transactionsPage.module.css";
 import Search from "@/app/components/search/search";
-import { GiFrogPrince } from "react-icons/gi";
 import { getFromDataTransactions } from "@/utils/data";
+import Transactions from "@/app/components/transactions/transactions";
 interface SearchParams {
   page?: number;
 }
@@ -13,7 +13,7 @@ const TransactionsPage = async ({
   searchParams: SearchParams;
 }) => {
   const page = searchParams?.page || 1;
-  const data = await getFromDataTransactions("clueen1zb002g68atnlrilo6n", page); // FIXME
+  const data = await getFromDataTransactions("cluq3b85w0000usi2y83y32fg", page); // FIXME
   if (!data) return;
   return (
     <div className={styles.container}>
@@ -21,32 +21,7 @@ const TransactionsPage = async ({
         <Search placeholder="Transactions..." />
       </div>
       <h2 className={styles.titleTable}>Your transactions</h2>
-      <table className={styles.table}>
-        <thead>
-          <tr>
-            <td>Hash</td>
-            <td>Date</td>
-            <td>Time</td>
-            <td>Type</td>
-            <td>Sum</td>
-          </tr>
-        </thead>
-        <tbody>
-          {data.transactions.map((transaction: any) => {
-            return (
-              <tr key={transaction.id}>
-                <td>{transaction.id}</td>
-                <td>{new Date(transaction.createdAt).toLocaleDateString()}</td>
-                <td>{new Date(transaction.createdAt).toLocaleTimeString()}</td>
-                <td>{transaction.type}</td>
-                <td>
-                  {transaction.sum} <GiFrogPrince size={15} color="yellow" />
-                </td>
-              </tr>
-            );
-          })}
-        </tbody>
-      </table>
+      <Transactions transactions={data.transactions} />
       <Pagination count={data.totalCount} />
     </div>
   );
