@@ -92,6 +92,7 @@ export const findInfoUser = async (id: string) => {
             transactions: true,
           },
         },
+        transactions: {},
       },
     });
 
@@ -107,7 +108,12 @@ export const findInfoUser = async (id: string) => {
       }
     });
 
-    return { ...user, totalGames: totalGames, winning: winning };
+    return {
+      ...user,
+      totalGames: totalGames,
+      winning: winning,
+      transactions: user.transactions,
+    };
   } catch (error) {
     throw new Error("Error search infoUser");
   }

@@ -34,7 +34,11 @@ export const WaitingGame = ({ setGame }: WaitingGameProps) => {
         <div className={styles.timer}>
           {seconds} <span>SECONDS</span>
         </div>
-        <div className={styles.minPLayers}>Waiting min 2 players...</div>
+        {true ? ( // TODO
+          <div className={styles.minPLayers}>Waiting min 2 players...</div>
+        ) : (
+          <div className={styles.minPLayers}>2 players in game...</div>
+        )}
       </div>
       <div className={styles.progressBar}>
         <div

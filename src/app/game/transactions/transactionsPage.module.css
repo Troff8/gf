@@ -14,12 +14,7 @@
   align-items: center;
   justify-content: space-between;
 }
-.table {
-  width: 100%;
-}
-.table td {
-  padding: 10px;
-}
+
 .user {
   display: flex;
   gap: 10px;
