@@ -13,15 +13,6 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-// TODO
-enum TransactionType {
-  BID
-  WINNING
-  REMOVAL
-  REPLENISHMENT
-  replenishment
-}
-
 enum Rank {
   ROOKIE
   BRONZE

@@ -1,8 +1,8 @@
-import { getFromDataGF } from "@/utils/data";
 import Card from "../card/card";
 import styles from "./topBar.module.css";
+import { findGF } from "@/utils/db/db";
 const TopBar = async () => {
-  const data = await getFromDataGF();
+  const data = await findGF();
   return (
     <div className={styles.cards}>
       <Card

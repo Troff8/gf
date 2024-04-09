@@ -1,8 +1,8 @@
 import Pagination from "@/app/components/pagination/pagination";
 import styles from "@/app/game/transactions/transactionsPage.module.css";
 import Search from "@/app/components/search/search";
-import { getFromDataTransactions } from "@/utils/data";
 import Transactions from "@/app/components/transactions/transactions";
+import { findTransactions } from "@/utils/db/db";
 interface SearchParams {
   page?: number;
 }
@@ -13,7 +13,7 @@ const TransactionsPage = async ({
   searchParams: SearchParams;
 }) => {
   const page = searchParams?.page || 1;
-  const data = await getFromDataTransactions("cluq3b85w0000usi2y83y32fg", page); // FIXME
+  const data = await findTransactions("cluq3b85w0000usi2y83y32fg", page); // FIXME
   if (!data) return;
   return (
     <div className={styles.container}>
