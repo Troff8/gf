@@ -1,12 +1,5 @@
 import prisma from "../src/utils/prisma";
-import {
-  User,
-  Transaction,
-  Game,
-  GameUser,
-  Report,
-  Account,
-} from "@prisma/client";
+import { User, Transaction, Game } from "@prisma/client";
 
 import { faker } from "@faker-js/faker";
 
@@ -49,16 +42,15 @@ let allGames: Game[];
   );
 
   const transactionData = Array.from({ length: 50 }, () => [
-    "win",
     faker.datatype.number({ min: 100, max: 15000 }).toString(),
   ]);
 
   allTransactions = await Promise.all(
-    transactionData.map(([type, sum]) =>
+    transactionData.map(([sum]) =>
       prisma.transaction.create({
         data: {
           userId: sample(allUsers).id,
-          type: type,
+          type: "WINNING",
           sum: Number(sum),
           gameId: sample(allGames).id,
         },

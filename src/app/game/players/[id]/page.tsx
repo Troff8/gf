@@ -1,11 +1,9 @@
 import Image from "next/image";
 import styles from "@/app/game/players/[id]/singleUserPage.module.css";
-import { getFromInfoUser } from "@/utils/data";
 import { Input } from "@/app/components/input/input";
 import Transactions from "@/app/components/transactions/transactions";
 import Pagination from "@/app/components/pagination/pagination";
-import { findTransactions } from "@/utils/db/db";
-import { DiVim } from "react-icons/di";
+import { findInfoUser, findTransactions } from "@/utils/db/db";
 
 interface SearchParams {
   page?: number;
@@ -22,9 +20,9 @@ export default async function SinglePlayerPage({
   };
   searchParams: SearchParams;
 }) {
-  const data = await getFromInfoUser(params.id);
-  if (!data) return;
   const page = searchParams.page || 1;
+  const data = await findInfoUser(params.id);
+  if (!data) return;
   const transactions = await findTransactions(params.id, page);
   return (
     <div className={styles.container}>
@@ -34,7 +32,7 @@ export default async function SinglePlayerPage({
             {data.image ? (
               <Image
                 src={data.image}
-                alt={data.nickname || ""}
+                alt={data.nickname || ""} // FIXME TO ANONIM AVATAR
                 className={styles.userImage}
                 width={287}
                 height={300}

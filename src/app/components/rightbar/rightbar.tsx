@@ -2,11 +2,11 @@ import { GiFrogPrince } from "react-icons/gi";
 import { modifyNumberString } from "@/utils/game";
 import styles from "./rightbar.module.css";
 import Image from "next/image";
-import { getFromDataGFBiggestWin, getFromDataGFLastWinner } from "@/utils/data";
+import { findBiggestWin, findLastWinner } from "@/utils/db/db";
 
 const RightBar = async () => {
-  const dataLastWinner = await getFromDataGFLastWinner();
-  const dataBiggestWin = await getFromDataGFBiggestWin();
+  const dataLastWinner = await findLastWinner();
+  const dataBiggestWin = await findBiggestWin();
   return (
     <div className={styles.container}>
       {dataLastWinner && (

@@ -1,10 +1,10 @@
 import Pagination from "@/app/components/pagination/pagination";
 import styles from "@/app/game/players/playersPage.module.css";
 import Search from "@/app/components/search/search";
-import { getFromDataPlayers } from "@/utils/data";
 import Image from "next/image";
 import Link from "next/link";
 import { GiFrogPrince } from "react-icons/gi";
+import { findUsers } from "@/utils/db/db";
 
 interface SearchParams {
   page?: number;
@@ -16,7 +16,7 @@ const PlayersPage = async ({
   searchParams: SearchParams;
 }) => {
   const page = searchParams?.page || 1;
-  const data = await getFromDataPlayers(page);
+  const data = await findUsers(page);
   if (!data) return;
   return (
     <div className={styles.container}>

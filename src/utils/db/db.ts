@@ -4,6 +4,7 @@ const ITEM_PER_PAGE = 8;
 
 export const findTransactions = async (userId: string, page: number) => {
   try {
+    if (page < 1) return { transactions: [], totalCount: 0 };
     const offset = (page - 1) * ITEM_PER_PAGE;
 
     const user = await prisma.user.findUnique({
@@ -23,61 +24,66 @@ export const findTransactions = async (userId: string, page: number) => {
     }
     return { transactions: user.transactions, totalCount: totalCount };
   } catch (error) {
-    throw new Error("Error search transactions");
+    throw new Error("Error 500 find transactions");
   }
 };
 
 export const findUsers = async (page: number) => {
-  const offset = (page - 1) * ITEM_PER_PAGE;
-  const users = await prisma.user.findMany({
-    skip: offset,
-    take: ITEM_PER_PAGE,
-    include: {
-      Game: {
-        include: {
-          transactions: true,
+  try {
+    const offset = (page - 1) * ITEM_PER_PAGE;
+    const users = await prisma.user.findMany({
+      skip: offset,
+      take: ITEM_PER_PAGE,
+      include: {
+        Game: {
+          include: {
+            transactions: true,
+          },
         },
       },
-    },
-  });
-  const totalCount = await prisma.user.count({});
+    });
+    const totalCount = await prisma.user.count({});
 
-  const resUsers: {
-    id: string;
-    active: boolean;
-    nickname: string | null;
-    image: string | null;
-    tradeLink: string | null;
-    createdAt: Date;
-    totalGames: number;
-    winning: number;
-  }[] = [];
-  users.map((user) => {
-    const totalGames = user.Game.length;
-    let winning = 0;
-    user.Game.forEach((game) => {
-      if (game.winnerId === user.id) {
-        game.transactions.forEach((transaction) => {
-          winning += +transaction.sum;
-        });
-      }
+    const resUsers: {
+      id: string;
+      active: boolean;
+      nickname: string | null;
+      image: string | null;
+      tradeLink: string | null;
+      createdAt: Date;
+      totalGames: number;
+      winning: number;
+    }[] = [];
+    users.map((user) => {
+      const totalGames = user.Game.length;
+      let winning = 0;
+      user.Game.forEach((game) => {
+        if (game.winnerId === user.id) {
+          game.transactions.forEach((transaction) => {
+            winning += +transaction.sum;
+          });
+        }
+      });
+      resUsers.push({
+        id: user.id,
+        active: user.active,
+        nickname: user.nickname,
+        image: user.image,
+        tradeLink: user.tradeLink,
+        createdAt: user.createdAt,
+        totalGames: totalGames,
+        winning: winning,
+      });
     });
-    resUsers.push({
-      id: user.id,
-      active: user.active,
-      nickname: user.nickname,
-      image: user.image,
-      tradeLink: user.tradeLink,
-      createdAt: user.createdAt,
-      totalGames: totalGames,
-      winning: winning,
-    });
-  });
-  if (!users || !totalCount) {
-    return null;
+    if (!users || !totalCount) {
+      return null;
+    }
+
+    return { users: resUsers, totalCount: totalCount };
+  } catch (error) {
+    console.log(error);
+    throw new Error("Error 500 find users");
   }
-
-  return { users: resUsers, totalCount: totalCount };
 };
 
 export const findInfoUser = async (id: string) => {
@@ -92,7 +98,6 @@ export const findInfoUser = async (id: string) => {
             transactions: true,
           },
         },
-        transactions: {},
       },
     });
 
@@ -112,10 +117,9 @@ export const findInfoUser = async (id: string) => {
       ...user,
       totalGames: totalGames,
       winning: winning,
-      transactions: user.transactions,
     };
   } catch (error) {
-    throw new Error("Error search infoUser");
+    throw new Error("Error 500 find info user");
   }
 };
 export const createReport = async (
@@ -135,8 +139,7 @@ export const createReport = async (
     });
     return true;
   } catch (error) {
-    console.log(error);
-    throw new Error("Error create reports");
+    throw new Error("500 Error create report");
   }
 };
 export const findGF = async () => {
@@ -145,19 +148,17 @@ export const findGF = async () => {
     const games = await prisma.game.count({});
     const totalWinnings = await prisma.transaction.aggregate({
       where: {
-        type: "win",
+        type: "WINNING",
       },
       _sum: {
         sum: true,
       },
     });
-    if (totalWinnings._sum.sum === null)
-      return { players, games, totalWinnings: 0 };
+    if (!totalWinnings._sum.sum) return { players, games, totalWinnings: 0 };
 
     return { players, games, totalWinnings: totalWinnings._sum.sum };
   } catch (error) {
-    console.log(error);
-    throw new Error("Error search GF data");
+    throw new Error("Error 500 find gf");
   }
 };
 
@@ -192,41 +193,46 @@ export const findLastWinner = async () => {
 
     return null;
   } catch (error) {
-    throw new Error("Error search GF data");
+    throw new Error("Error 500 find last winner");
   }
 };
 export const findBiggestWin = async () => {
-  const gamesWithTransactionSums = await prisma.game.findMany({
-    include: {
-      transactions: true,
-    },
-  });
-
-  let maxSum = 0;
-  let gameWithMaxSum = null;
-
-  for (const game of gamesWithTransactionSums) {
-    const sum = game.transactions.reduce(
-      (total, transaction) => total + transaction.sum,
-      0
-    );
-    if (sum > maxSum) {
-      maxSum = sum;
-      gameWithMaxSum = game;
-    }
-  }
-  if (gameWithMaxSum && gameWithMaxSum.winnerId) {
-    const user = await prisma.user.findUnique({
-      where: {
-        id: gameWithMaxSum.winnerId,
-      },
-      select: {
-        nickname: true,
-        image: true,
+  try {
+    const gamesWithTransactionSums = await prisma.game.findMany({
+      include: {
+        transactions: true,
       },
     });
 
-    return { ...user, maxSum };
+    let maxSum = 0;
+    let gameWithMaxSum = null;
+
+    for (const game of gamesWithTransactionSums) {
+      const sum = game.transactions.reduce(
+        (total, transaction) => total + transaction.sum,
+        0
+      );
+      if (sum > maxSum) {
+        maxSum = sum;
+        gameWithMaxSum = game;
+      }
+    }
+    if (gameWithMaxSum && gameWithMaxSum.winnerId) {
+      const user = await prisma.user.findUnique({
+        where: {
+          id: gameWithMaxSum.winnerId,
+        },
+        select: {
+          nickname: true,
+          image: true,
+        },
+      });
+
+      return { ...user, maxSum };
+    }
+    return null;
+  } catch (error) {
+    console.log(error);
+    throw new Error("Error 500 find biggest win");
   }
-  return null;
 };
